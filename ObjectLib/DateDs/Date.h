@@ -38,9 +38,9 @@ public:
 	static Date now();
 
 
-	Object get_year()  const;
+	Object get_year ()  const;
 	Object get_month() const;
-	Object get_day()   const;
+	Object get_day  ()   const;
 
 	unsigned int get_year_num  ();
 	unsigned char get_month_num();
@@ -50,15 +50,12 @@ public:
 
 	DateFormat extractDateFormate(Object date_str);
 
-
-
 	bool operator < (const Date& other) const;
 	bool operator > (const Date& other) const;
 
 	bool operator <= (const Date& other) const;
 	bool operator >= (const Date& other) const;
 	bool operator == (const Date& other) const;
-
 
 	bool operator < (Object& other) const;
 	bool operator > (Object& other) const;
