@@ -110,35 +110,6 @@ Object::Object() noexcept
     type = Dtype::NA;
 }
 
-//Object::Object(string invalue, Dtype intype)
-//{
-//
-//	type = intype;
-//
-//	// to parse it and put it in right place.
-//	switch (type)
-//	{
-//	case Dtype::STRING:
-//	{
-//		value = new String(invalue);
-//		break;
-//	}
-//
-//	case Dtype::NUMBER:
-//	{
-//		value = new double(stod(invalue));
-//		break;
-//	}
-//	case Dtype::NA:
-//		value = NULL;
-//		break;
-//	default:
-//
-//		value = NULL;
-//		break;
-//	}
-//
-//}
 Object::Object(String invalue, Dtype intype)
 {
 	type = intype;
