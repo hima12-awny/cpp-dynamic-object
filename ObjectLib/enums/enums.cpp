@@ -3,13 +3,13 @@
 
 // Definition and initialization of the unordered map
 const unordered_map<Dtype, string> dtypeMap = {
-	{Dtype::STRING, "STRING"},
-	{Dtype::NUMBER, "NUMBER"},
-	{Dtype::DATE, "DATE"},
-	{Dtype::DATE_YEAR, "DATE_YEAR"},
-	{Dtype::DATE_MONTH, "DATE_MONTH"},
-	{Dtype::DATE_DAY, "DATE_DAY"},
-	{Dtype::NA, "NA"}
+	{Dtype::STRING     	, "STRING"},
+	{Dtype::NUMBER		, "NUMBER"},
+	{Dtype::DATE		, "DATE"},
+	{Dtype::DATE_YEAR	, "DATE_YEAR"},
+	{Dtype::DATE_MONTH	, "DATE_MONTH"},
+	{Dtype::DATE_DAY	, "DATE_DAY"},
+	{Dtype::NA		, "NA"}
 };
 
 std::ostream& operator<<(std::ostream& os,const Dtype& dtype) {
