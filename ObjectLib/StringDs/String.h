@@ -30,19 +30,19 @@ public:
 
 	String stripl();
 	String stripr();
-	String strip();
-	size_t len() const;
+	String strip ();
+	size_t len   () const;
 
 	int count(string target);
 
-	String		   substr (int start, int end=-1);
+	String         substr (int start, int end=-1);
 	size_t         find   (string target, int start=0);
 	String         replace(string from, string to);
 	vector<Object> split  (string sep="", bool parsing_numbers=false);
 	String static  join   (string sep, vector<Object> arr);
 
-	String up();
-	String lw();
+	String    up();
+	String    lw();
 	String title();
 
 	String operator + (const String& other) const;
@@ -62,7 +62,7 @@ public:
 	bool operator !=(const String& other) const;
 
 
-	String& operator=(const String& onther) {
+	String& operator = (const String& onther) {
 		
 		value = onther.value;
 		return *this;
