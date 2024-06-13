@@ -1,0 +1,51 @@
+﻿  exmapels.cpp
+  Date.cpp
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(100,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(235,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(264,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(273,18): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  enums.cpp
+  object.cpp
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(314,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(615,18): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(627,17): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(660,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(672,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(684,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(878,30): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(884,56): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(963,30): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  String.cpp
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(55,12): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(108,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(148,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(239,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(239,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(259,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp(273,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(337,1): warning C4715: 'Object::get': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(365,1): warning C4715: 'Object::getYear': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(375,1): warning C4715: 'Object::getMonth': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(385,1): warning C4715: 'Object::getDay': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(396,1): warning C4715: 'Object::stripl': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(414,1): warning C4715: 'Object::strip': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(405,1): warning C4715: 'Object::stripr': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(424,1): warning C4715: 'Object::len': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(434,1): warning C4715: 'Object::count': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(444,1): warning C4715: 'Object::split': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(454,1): warning C4715: 'Object::find': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(465,1): warning C4715: 'Object::replace': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(474,1): warning C4715: 'Object::substr': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(484,1): warning C4715: 'Object::up': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(492,1): warning C4715: 'Object::lw': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(501,1): warning C4715: 'Object::title': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(590,1): warning C4715: 'Object::to_num': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(602,1): warning C4715: 'Object::to_date': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp(642,1): warning C4715: 'Object::to_date_attr': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(390,1): warning C4715: 'Date::operator>': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(370,1): warning C4715: 'Date::operator<': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(411,1): warning C4715: 'Date::operator<=': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(433,1): warning C4715: 'Date::operator>=': not all control paths return a value
+K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp(456,1): warning C4715: 'Date::operator==': not all control paths return a value
+  Object_1.1.vcxproj -> K:\C++\Object DS\Object_1.1\Object_1.1\x64\Debug\Object_1.1.exe

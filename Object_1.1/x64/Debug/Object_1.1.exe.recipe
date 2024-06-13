@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\x64\Debug\Object_1.1.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.cpp</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\enums\enums.cpp</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.cpp</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.cpp</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\DateDs\Date.h</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\enums\enums.h</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\object.h</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>K:\C++\Object DS\Object_1.1\Object_1.1\ObjectLib\StringDs\String.h</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
