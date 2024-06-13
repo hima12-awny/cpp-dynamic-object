@@ -1,6 +1,6 @@
 # Introduction
 
-we know that C++ is Static Data type only if you have Text value stored in variable with data type string if a number is any data type valid with numbers like int, float and so on.
+We know that C++ is Static Data type only if you have Text value stored in variable with data type string if a number is any data type valid with numbers like int, float and so on.
 and arrays is strictly must be have elements only single data type, and this made a low performance solution for me because all vectors strictly in String data type and converting any value to handel any thing inside latter like numbers of dates.
 <br>
 so i decided to make something to holed and handle most data type used Like String, Numbers and Dates.
