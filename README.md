@@ -348,7 +348,7 @@ recognize that the solution is just **Time and well-directed Passion.** Time mea
 
 ## 8. **Acknowledgement**
 
-I would like to express my sincere gratitude to [Ahmed Khaled](#https://www.linkedin.com/in/ahmad-khaled-hamed/) for his invaluable assistance in brainstorming, to [Ahmed Khafagy](#https://www.linkedin.com/in/ahmednaderkhafagy/) for his crucial support in helping me present my work, and to [Abdelrahman H. Soliman](#https://www.instagram.com/abdelrahmantalks?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==) for his unwavering encouragement, which motivated me to continue and complete this project.
+I would like to express my sincere gratitude to [Ahmed Khaled](https://www.linkedin.com/in/ahmad-khaled-hamed/) for his invaluable assistance in brainstorming, to [Ahmed Khafagy](https://www.linkedin.com/in/ahmednaderkhafagy/) for his crucial support in helping me present my work, and to [Abdelrahman H. Soliman](https://www.instagram.com/abdelrahmantalks?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==) for his unwavering encouragement, which motivated me to continue and complete this project.
 
 there is a lot in source code to improve if you want, and if you find any bugs please don't hesitate to inform me.
 <br> <br>
