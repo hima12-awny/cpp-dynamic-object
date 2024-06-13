@@ -53,7 +53,7 @@ public:
 
 	String* ptr_str() const;
 	double* ptr_num() const;
-	Date* ptr_date() const;
+	Date* ptr_date () const;
 	unsigned int* ptr_date_attr() const;
 
 	// genrail
@@ -77,8 +77,8 @@ public:
 
 	Object substr(int start, int end=-1);
 
-	Object up();
-	Object lw();
+	Object    up();
+	Object    lw();
 	Object title();
 	size_t find(string target, int start = 0);
 
@@ -88,7 +88,7 @@ public:
 	// Numbers ///////////////////////////////
 
 
-	static Object rand_num(int max = 1000, int min = 0);
+	static Object         rand_num (int max=1000, int min = 0);
 	static vector<Object> rand_nums(int size, int max, int min = 0);
 
 	//////////////////////////////////////////
@@ -101,13 +101,13 @@ public:
 
 	// converting (parseing) a group a value of some dtype to Object.
 
-	Object to_str();
-	Object to_num();
+	Object to_str ();
+	Object to_num ();
 	Object to_date();
 
-	Object to_date_day();
+	Object to_date_day  ();
 	Object to_date_month();
-	Object to_date_year();
+	Object to_date_year ();
 
 
 	static vector<Object> from_vector_string(vector<string> values);
@@ -117,31 +117,31 @@ public:
 
 	Object& operator = (const Object& other);
 
-	Object operator +(Object other);
-	Object operator -(Object other);
-	Object operator /(Object other);
-	Object operator *(Object other);
+	Object operator + (Object other);
+	Object operator - (Object other);
+	Object operator / (Object other);
+	Object operator * (Object other);
 
-	Object operator +(double other);
-	Object operator -(double other);
-	Object operator /(double other);
-	Object operator *(double other);
+	Object operator + (double other);
+	Object operator - (double other);
+	Object operator / (double other);
+	Object operator * (double other);
 
-	void operator +=(Object other);
-	void operator -=(Object other);
-	void operator /=(Object other);
-	void operator *=(Object other);
+	void operator += (Object other);
+	void operator -= (Object other);
+	void operator /= (Object other);
+	void operator *= (Object other);
 
-	void operator +=(double other);
-	void operator -=(double other);
-	void operator /=(double other);
-	void operator *=(double other);
+	void operator += (double other);
+	void operator -= (double other);
+	void operator /= (double other);
+	void operator *= (double other);
 
 	bool operator < (Object other);
 	bool operator > (Object other);
-	bool operator <=(Object other);
-	bool operator >=(Object other);
-	bool operator ==(Object other);
+	bool operator <= (Object other);
+	bool operator >= (Object other);
+	bool operator == (Object other);
 
 	friend ostream& operator <<(ostream& os,const Object& obj);
 };
