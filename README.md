@@ -1,7 +1,8 @@
 # Introduction
 
-We know that C++ is Static Data type only if you have Text value stored in variable with data type string if a number is any data type valid with numbers like int, float and so on.
-and arrays is strictly must be have elements only single data type, and this made a low performance solution for me because all vectors strictly in String data type and converting any value to handel any thing inside latter like numbers of dates.
+We know that C++ is Static Data type only if you have Text value stored in a variable with data type string if a number is any data type valid with numbers like int, float and so on.
+And arrays are strict must-have elements with only a single data type. 
+If I want to put different values with different data types in one vector, this made a low-performance solution for me because all vector's values are strictly in String data type and converting any value to handle anything latter like numbers of dates.
 <br>
 so i decided to make something to holed and handle most data type used Like String, Numbers and Dates.
 <br>
