@@ -97,7 +97,7 @@ vector<Object> Date::validate_date_str(Object date_str)
 	}
 
 	int delimiter_counter = 0;
-	int str_len = str_.length();
+	int str_len = (int)str_.length();
 
 	bool is_my_delimiter;
 
@@ -134,7 +134,7 @@ vector<Object> Date::validate_date_str(Object date_str)
 
 	for (size_t i = 0; i < 3; i++)
 	{
-		if (attrs[i].type != Dtype::NUMBER) {
+		if (attrs[i].secType != Dtype::NUMBER) {
 
 			date_str.print_info();
 			cout << "Can't to Parse This String to Date " << endl <<
@@ -179,23 +179,43 @@ Date::Date() {
 }
 Date::Date(const char date_str[])
 {
-	*this = Date(Object(date_str, Dtype::STRING));
+	Object temp = Object(date_str, Dtype::STRING);
+	*this = Date(temp, DateFormat::AUTO);
 }
-Date::Date(Object date_str)
+Date::Date(Object obj)
 {
-	DateFormat extracted_format = Date::extractDateFormate(date_str);
-	*this = Date(date_str.get(), extracted_format);
+	if (obj.type == Dtype::DATE) {
+		*this = obj.get_val<Date>().copy();
+	}
+	else {
+
+		DateFormat extracted_format = Date::extractDateFormate(obj);
+		*this = Date(obj, extracted_format);
+	}
+
 }
+
+Date::Date(string& datestr, DateFormat dateformat)
+{
+	DateFormat extracted_format = dateformat == DateFormat::AUTO ? Date::extractDateFormate(Object(datestr)) : dateformat;
+
+	*this = parseDateFromString(datestr, extracted_format);
+}
+
+Date::Date(const Object& datestr, DateFormat dateformat)
+{
+	DateFormat extracted_format = dateformat == DateFormat::AUTO ? Date::extractDateFormate(datestr) : dateformat;
+
+	*this = parseDateFromString(datestr.get_val<String>().get(), extracted_format);
+}
+
 Date::Date(unsigned int year, unsigned char month, unsigned char day)
 {
 	this->year = year;
 	this->month = month;
 	this->day = day;
 }
-Date::Date(Object datestr, DateFormat dateformat)
-{
-	*this = parseDateFromString(datestr.get(), dateformat);
-}
+
 
 
 Object Date::get_year () const
@@ -209,6 +229,32 @@ Object Date::get_month() const
 Object Date::get_day  () const
 {
 	return Object(day, Dtype::DATE_DAY);
+}
+
+uint32_t Date::get_attr_num(Dtype attr_type)
+{
+	switch (attr_type)
+	{
+	case Dtype::DATE_MONTH: return this->month;
+	case Dtype::DATE_DAY: return this->day;
+	case Dtype::DATE_YEAR: return this->year;
+	default:
+		return 0;
+		break;
+	}
+}
+
+Object Date::get_attr(Dtype attr_type)
+{
+	switch (attr_type)
+	{
+	case Dtype::DATE_MONTH: return Object(this->month, attr_type);
+	case Dtype::DATE_DAY: return Object(this->day, attr_type);
+	case Dtype::DATE_YEAR: return Object(this->year, attr_type);
+	default:
+		return Object();
+		break;
+	}
 }
 
 unsigned int  Date::get_year_num ()
@@ -232,7 +278,7 @@ string Date::get() const
 	string str_month = to_string(month);
 	string str_day   = to_string(day);
 
-	int len_y = 4 - str_year.length();
+	int len_y = (4 - (int)str_year.length());
 
 	for (int i = 0; i < len_y; i++)
 	{
@@ -255,10 +301,10 @@ DateFormat Date::extractDateFormate(Object date_str)
 {
 	vector<Object> attrs = validate_date_str(date_str);
 
-	int year_index = 0, month_index = 1;
+	int8_t year_index = 0, month_index = 1;
 
 	// get year
-	for (size_t i = 0; i < 3; i++)
+	for (int8_t i = 0; i < 3; i++)
 	{
 		if (attrs[i] > 31) {
 			year_index = i;
@@ -267,9 +313,9 @@ DateFormat Date::extractDateFormate(Object date_str)
 	}
 
 	// get month
-	for (size_t i = 0; i < 3; i++)
+	for (int8_t i = 0; i < 3; i++)
 	{
-		if (attrs[i] < 12) {
+		if (attrs[i] <= 12) {
 			month_index = i;
 			break;
 		}
@@ -301,60 +347,57 @@ Date Date::now()
 	return Date(currentY, currentM, currentD);
 }
 
+Date Date::copy()
+{
+	return *this;
+}
+
 
 bool Date::operator < (const Date& other)  const {
 
-	return (
-		day   < other.day   &&
-		month < other.month &&
-		year  < other.year
-		);
+	if (year != other.year) return year < other.year;
+	if (month != other.month) return month < other.month;
+	return day < other.day;
 }
 bool Date::operator > (const Date& other)  const {
 
-
-	return (
-		day   > other.day   &&
-		month > other.month &&
-		year  > other.year
-		);
+	if (year != other.year) return year > other.year;
+	if (month != other.month) return month > other.month;
+	return day > other.day;
 }
 
 bool Date::operator <= (const Date& other) const {
 
-	return (
-		day   <= other.day   &&
-		month <= other.month &&
-		year  <= other.year
-		);
+	if (year != other.year) return year <= other.year;
+	if (month != other.month) return month <= other.month;
+	return day <= other.day;
 }
 bool Date::operator >= (const Date& other) const {
 
-	return (
-		day   >= other.day   &&
-		month >= other.month &&
-		year  >= other.year
-		);
+	if (year != other.year) return year >= other.year;
+	if (month != other.month) return month >= other.month;
+	return day >= other.day;
 }
 
 bool Date::operator == (const Date& other) const {
 
-	return (
-		day   == other.day   &&
-		month == other.month &&
-		year  == other.year
-		);
+	return year == other.year && month == other.month && day == other.day;
+}
+bool Date::operator != (const Date& other) const {
+
+	return !(*this == other);
 }
 
-bool Date::operator < (Object& other)  const
+
+bool Date::operator < (const Object& other)  const
 {
 
 	switch (other.type)
 	{
-	case Dtype::DATE:		return *this < *other.ptr_date();
-	case Dtype::DATE_YEAR:  return year  < *other.ptr_date_attr();
-	case Dtype::DATE_MONTH: return month < *other.ptr_date_attr();
-	case Dtype::DATE_DAY:	return day   < *other.ptr_date_attr();
+	case Dtype::DATE:		return *this < other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  < other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month < other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day	 < other.get_val<uint32_t>();
 
 	default:
 
@@ -364,18 +407,20 @@ bool Date::operator < (Object& other)  const
 			+ operation
 			<< other.type << "(" << other << ")" << endl;
 		assert(0);
-
+		return 0;
 		break;
 	}
+	return 0;
+
 }
-bool Date::operator > (Object& other)  const
+bool Date::operator > (const Object& other)  const
 {
 	switch (other.type)
 	{
-	case Dtype::DATE:		return *this > *other.ptr_date();
-	case Dtype::DATE_YEAR:  return year  > *other.ptr_date_attr();
-	case Dtype::DATE_MONTH: return month > *other.ptr_date_attr();
-	case Dtype::DATE_DAY:	return day   > *other.ptr_date_attr();
+	case Dtype::DATE:		return *this > other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  > other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month > other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day > other.get_val<uint32_t>();
 
 	default:
 
@@ -385,18 +430,21 @@ bool Date::operator > (Object& other)  const
 			+ operation
 			<< other.type << "(" << other << ")" << endl;
 		assert(0);
+		return 0;
 		break;
 	}
+	return 0;
+
 }
 
-bool Date::operator <= (Object& other)  const
+bool Date::operator <= (const Object& other)  const
 {
 	switch (other.type)
 	{
-	case Dtype::DATE:		return *this <= *other.ptr_date();
-	case Dtype::DATE_YEAR:  return year  <= *other.ptr_date_attr();
-	case Dtype::DATE_MONTH: return month <= *other.ptr_date_attr();
-	case Dtype::DATE_DAY:	return day   <= *other.ptr_date_attr();
+	case Dtype::DATE:		return *this <= other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  <= other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month <= other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day <= other.get_val<uint32_t>();
 
 	default:
 
@@ -407,16 +455,20 @@ bool Date::operator <= (Object& other)  const
 			<< other.type << "(" << other << ")" << endl;
 		assert(0);
 		break;
+		return 0;
+
 	}
+	return 0;
+
 }
-bool Date::operator >= (Object& other)  const
+bool Date::operator >= (const Object& other)  const
 {
 	switch (other.type)
 	{
-	case Dtype::DATE:		return *this >= *other.ptr_date();
-	case Dtype::DATE_YEAR:  return year  >= *other.ptr_date_attr();
-	case Dtype::DATE_MONTH: return month >= *other.ptr_date_attr();
-	case Dtype::DATE_DAY:	return day   >= *other.ptr_date_attr();
+	case Dtype::DATE:		return *this >= other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  >= other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month >= other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day >= other.get_val<uint32_t>();
 
 	default:
 
@@ -429,17 +481,21 @@ bool Date::operator >= (Object& other)  const
 
 		assert(0);		
 		break;
+		return 0;
+
 	}
+	return 0;
+
 }
 
-bool Date::operator == (Object& other)  const
+bool Date::operator == (const Object& other)  const
 {
 	switch (other.type)
 	{
-	case Dtype::DATE:		return *this == *other.ptr_date();
-	case Dtype::DATE_YEAR:  return year  == *other.ptr_date_attr();
-	case Dtype::DATE_MONTH: return month == *other.ptr_date_attr();
-	case Dtype::DATE_DAY:	return day   == *other.ptr_date_attr();
+	case Dtype::DATE:		return *this == other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  == other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month == other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day == other.get_val<uint32_t>();
 
 	default:
 
@@ -452,7 +508,37 @@ bool Date::operator == (Object& other)  const
 		assert(0);
 
 		break;
+		return 0;
+
 	}
+	return 0;
+
+}
+
+bool Date::operator!=(const Object& other) const
+{
+	switch (other.type)
+	{
+	case Dtype::DATE:		return *this != other.get_val<Date>();
+	case Dtype::DATE_YEAR:  return year  != other.get_val<uint32_t>();
+	case Dtype::DATE_MONTH: return month != other.get_val<uint32_t>();
+	case Dtype::DATE_DAY:	return day != other.get_val<uint32_t>();
+
+	default:
+
+
+		string operation = " != ";
+		cout << "Comparision Error:: " <<
+			Dtype::DATE << "(" << *this << ")"
+			+ operation
+			<< other.type << "(" << other << ")" << endl;
+		assert(0);
+
+		break;
+		return 0;
+
+	}
+	return 0;
 }
 
 Date& Date::operator = (const Date& other)

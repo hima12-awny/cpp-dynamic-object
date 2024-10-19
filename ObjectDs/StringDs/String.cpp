@@ -10,20 +10,12 @@ String::String(const char value[])
 	this->value = value;
 }
 
-string String::get() const
-{
-	return value;
-}
-size_t String::len() const
-{
-	return value.length();
-}
-int    String::count(string target)
+int String::count(string target)
 {
 	size_t target_len = target.length();
 	int counter = 0;
 
-	size_t end = this->len() - target_len +1;
+	size_t end = this->len() - target_len + 1;
 	for (size_t i = 0; i < end; i++)
 	{
 		if (value.substr(i, target_len) == target)
@@ -45,7 +37,7 @@ String String::stripr()
 	if (end_index == std::string::npos) return *this;
 	return String(value.substr(0, (int)end_index + 1));
 }
-String String::strip () {
+String String::strip() {
 	return stripl().stripr();
 }
 
@@ -64,15 +56,20 @@ size_t String::find(string target, int start)
 	return index;
 }
 
+bool String::contains(string target)
+{
+	return this->find(target) != -1;
+}
+
 vector<size_t> String::get_min_find(
-	string value, 
-	vector<string> from, 
-	int start_pos) {
+	string value,
+	vector<string> from,
+	size_t start_pos) {
 
 	size_t index = string::npos;
 	size_t from_index = 0;
 
-	for (size_t i = 0; i < from.size(); i++)
+	for (int i = 0; i < from.size(); i++)
 	{
 		auto curr_index = value.find(from[i], start_pos);
 		if (curr_index < index) {
@@ -81,7 +78,7 @@ vector<size_t> String::get_min_find(
 		}
 	}
 
-	return {index, from_index};
+	return { index, from_index };
 }
 
 String String::replace(string from, string to)
@@ -91,10 +88,11 @@ String String::replace(string from, string to)
 	size_t to_len = to.length();
 
 	vector<Object> froms_ = String(from).split("|");
+
 	vector<string> froms(froms_.size());
 	vector<size_t> froms_len(froms_.size());
 
-	vector<size_t> start_pos_and_froms_index = {0, 0};
+	vector<size_t> start_pos_and_froms_index = { 0, 0 };
 
 	for (size_t i = 0; i < froms_.size(); i++)
 	{
@@ -105,18 +103,22 @@ String String::replace(string from, string to)
 
 	while (1) {
 
-		start_pos_and_froms_index = get_min_find(str, froms, start_pos_and_froms_index[0]);
+		start_pos_and_froms_index = get_min_find(
+			str,
+			froms,
+			start_pos_and_froms_index[0]
+		);
 
 		if (start_pos_and_froms_index[0] == string::npos) {
 			break;
 		}
 
-		str.replace(
-			start_pos_and_froms_index[0], 
-			froms_len[start_pos_and_froms_index[1]], 
+		str = str.replace(
+			start_pos_and_froms_index[0],
+			froms_len[start_pos_and_froms_index[1]],
 			to);
 
-		start_pos_and_froms_index[0] += to_len;
+		start_pos_and_froms_index[0] += (int)to_len;
 	}
 
 	return String(str);
@@ -132,8 +134,8 @@ vector<Object> String::split(string sep, bool parsing_numbers)
 		vector<Object> res_vec(size);
 		for (size_t i = 0; i < size; i++)
 		{
-			res_vec[i] = parsing_numbers?
-				Object(string(1, value_str[i])): 
+			res_vec[i] = parsing_numbers ?
+				Object(string(1, value_str[i])) :
 				Object(string(1, value_str[i]), Dtype::STRING);
 		}
 		return res_vec;
@@ -145,7 +147,7 @@ vector<Object> String::split(string sep, bool parsing_numbers)
 	size_t start = 0;
 	size_t end = 0;
 
-	int sep_len = sep.length();
+	int sep_len = (int)sep.length();
 	int idx = 0;
 	string temp_str;
 
@@ -155,7 +157,7 @@ vector<Object> String::split(string sep, bool parsing_numbers)
 
 		if (temp_str.empty() == false) {
 
-			res_vec[idx] = parsing_numbers?
+			res_vec[idx] = parsing_numbers ?
 				Object(temp_str) :
 				Object(temp_str, Dtype::STRING);
 		}
@@ -213,6 +215,55 @@ String String::title()
 	return String(result);
 }
 
+Object String::extract_pattern(const std::string& pattern)
+{
+
+	std::regex regex_pattern(pattern);
+	std::smatch match; // For storing the matched result
+
+	// If a match is found, extract the first occurrence
+	if (std::regex_search(value, match, regex_pattern) && !match.empty()) {
+		return Object(match.str(0));
+	}
+	return Object();
+}
+
+vector<Object> String::extract_pattern(
+	const vector<Object>& values, const string& pattern)
+{
+	// Create a regex object from the given pattern
+	std::regex regex_pattern(pattern);
+
+	// Vector to store the results
+	vector<Object> extracted_values;
+	extracted_values.reserve(values.size());
+
+	// Iterate through each string in the input vector
+	for (const auto& str_value : values) {
+		if (str_value.type != Dtype::STRING) {
+			extracted_values.emplace_back(Object());
+		}
+
+		std::smatch match; // For storing the matched result
+
+		// If a match is found, extract the first occurrence
+		const string curr_str = str_value.get_val<String>().get();
+
+		if (std::regex_search(curr_str, match, regex_pattern) && !match.empty()) {
+
+			extracted_values.emplace_back(
+				Object(match.str(0))
+			); // Store the matched string
+		}
+		else {
+			extracted_values.emplace_back(Object());
+		}
+	}
+
+	return extracted_values;
+}
+
+
 String String::join(string sep, vector<Object> arr)
 {
 
@@ -234,9 +285,10 @@ String String::join(string sep, vector<Object> arr)
 String String::operator + (const String& other) const {
 	return String(value + other.value);
 }
-String String::operator - (const String& other) const {
 
-	int value_len = value.length(), other_value_len = other.len();
+String String::operator - (const String& other) {
+
+	int value_len = (int)value.length(), other_value_len = other.len();
 
 	if (value_len < other_value_len) {
 
@@ -245,32 +297,22 @@ String String::operator - (const String& other) const {
 		assert(false);
 	}
 
-	auto start_pos = value.find(other.value);
-
-	if (start_pos == std::string::npos) return *this;
-
-	string temp_str = "";
-
-	for (int i = 0; i < start_pos; i++)
-	{
-		temp_str += value[i];
-	}
-
-	for (int i = start_pos + other_value_len; i < value_len; i++)
-	{
-		temp_str += value[i];
-	}
-
-	return String(temp_str);
+	return this->replace(other.value, " ");
 }
-String String::operator * (const float&  other) const {
+
+String String::operator * (const float& other) const {
 
 	if (other == 1) return *this;
+
+	string temp_value = this->value;
+	if (other < 0) {
+		std::reverse(temp_value.begin(), temp_value.end());
+	}
 
 	string temp_str = "";
 	int s_int = (int)other;
 	float s_float = other - (int)other;
-	int part_of = s_float * value.length();
+	int part_of = (int)(s_float * (int)value.length());
 
 	for (int i = 0; i < s_int; i++)
 	{
@@ -283,6 +325,38 @@ String String::operator * (const float&  other) const {
 	return String(temp_str);
 }
 
+String String::operator + (const float& other) const
+{
+	assert(0 && "Invalid Operation: you trying to add number to a String.");
+	return String();
+}
+
+String String::operator - (const float& other) const
+{
+	assert(0 && "Invalid Operation: you trying to subtract number to a String.");
+
+	return String();
+}
+
+String String::operator / (const float& other) const
+{
+	assert(0 && "Invalid Operation: you trying to divide the String by number.");
+
+	return String();
+}
+
+String String::operator / (const String& other) const
+{
+	assert(0 && "Invalid Operation: you trying to divide the String by another String.");
+	return String();
+}
+
+String String::operator * (const String& other) const
+{
+	assert(0 && "Invalid Operation: you trying to multiply the String by String.");
+	return String();
+}
+
 void String::operator += (const String& other)
 {
 	*this = *this + other;
@@ -291,7 +365,7 @@ void String::operator -= (const String& other)
 {
 	*this = *this - other;
 }
-void String::operator *= (const float& other) {
+void String::operator *= (const float&  other) {
 
 	*this = *this * other;
 }
