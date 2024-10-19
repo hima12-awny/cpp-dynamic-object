@@ -8,9 +8,39 @@ so i decided to make something to holed and handle most data type used Like Stri
 <br>
 called
 
-# Object Class
+# ``Object`` Class
 
-The `Object` class in C++ offers a versatile data structure capable of storing various types of data, including strings, numbers, and dates. It provides functionalities for type conversion, arithmetic operations, random value generation, and string manipulation.
+The `Object` class in C++ offers a versatile data structure capable of storing various types of data, including strings, numbers, and dates. It provides functionalities for type conversion, arithmetic operations, random value generation, and string manipulation. <br>
+this ``Object`` consist of 
+* unique ptr: `value` -> pointer can point to multiple of different data type value but one at once,
+<br> can point to 
+  * Built-In Types: `int8_t`, `int16_t`, `int32_t`, `int64_t`, `float`, `double`, `uint32_t`
+  * User-Defined Types: `String` , `Date`,
+
+* Dtype: `type` -> the type of the `Object`
+* Dtype: `secType` -> the second Type of the `Object` like if it's type `INT8` so the second data type is `NUMBER`
+
+
+### Handled Types The Object can treat with:
+
+| **Category**      | **Enum Type**       | **Description**          | **Size (bytes)**| **Total Object Size (bytes)** |
+|-------------------|----------------|--------------------------|-----------------|-----------------------|
+| **Numbers**       |                |                          |                 |                       |
+|                   | **Integers**   |                          |                 |                       |
+|                   | INT8           | Integer (8-bit)          | 1               | 17                    |
+|                   | INT16          | Integer (16-bit)         | 2               | 18                    |
+|                   | INT32          | Integer (32-bit)         | 4               | 20                    |
+|                   | INT64          | Integer (64-bit)         | 8               | 24                    |
+|                   | **Floating Point** |                      |                 |                       |
+|                   | FLOAT          | Floating-point (32-bit)  | 4               | 20                    |
+|                   | DOUBLE         | Floating-point (64-bit)  | 8               | 24                    |
+| **String**        | STRING         | Textual data             | Variable size   | ~56                   |
+| **Date**          | DATE           | Date data type           | 8               | 24                    |
+| **Date Attributes**|               |                          |                 |                       |
+|                   | DATE_ATTR_YEAR | Year attribute           | 4               | 20                    |
+|                   | DATE_ATTR_MONTH| Month attribute          | 4               | 20                    |
+|                   | DATE_ATTR_DAY  | Day attribute            | 4               | 20                    |
+
 
 ## Key Features
 
@@ -29,7 +59,7 @@ int main() {
     Object var1 = "Hello, world!";
 
     Object var2 = 42;
-    Object var3 = "42";
+    Object var3 = "42.5";
 
     Object var4(2000, 5, 3);
 
@@ -38,8 +68,8 @@ int main() {
     cout << var1 << " : " << var1.type; // Hello, world! : STRING
 
     // detecting number values
-    cout << var2 << " : " << var2.type; // 42 : NUMBER
-    cout << var3 << " : " << var3.type; // 42 : NUMBER
+    cout << var2 << " : " << var2.type; // 42 : INT32
+    cout << var3 << " : " << var3.type; // 42 : DOUBLE
 
     // date value
     cout << var4 << " : " << var4.type; // 2000-05-03 : DATE
@@ -76,15 +106,24 @@ int main() {
 
 	// output
 	// string values
-	cout << var1 << " : " << var1.type; // HimaHima : STRING
+	cout << var1 << " : " << var1.type << endl; // HimaHima : STRING
 
 
-	cout << var2 << " : " << var2.type; // HimaHi : STRING
+	cout << var2 << " : " << var2.type << endl; // HimaHi : STRING
                                         // i think same what you think!
                                         // you can see more operation later in this repo.
 
 	// number value
-	cout << var3 << " : " << var3.type; // 82 : NUMBER
+	cout << var3 << " : " << var3.type << endl; // 82 : INT32
+
+	// New Features:
+	Object var4 = 2.5; // with type = DOUBLE
+	Object var5 = 2;   // with type = INT32
+
+	var5 = var5 * var4; // the result will be the greater one
+						// means that will be DOUBLE
+
+	cout << var5 << " : " << var5.type << endl; // 5.0 : DOUBLE
 
 	return 0;
 }
@@ -103,21 +142,60 @@ int main() {
 
 	// Creating objects with different types
 	Object var1 = "2020/05/25"; // now it is STRING Dtype
-	Object var2 = 42;           // now it is NUMBER Dtype
+	Object var2 = 42;           // now it is INT32 Dtype
 
     // converting them to different data types
 	var1 = var1.to_date();
 	var2 = var2.to_str() * 2; // you can guess the result of this?
 
 	// output
-	cout << var1 << " : " << var1.type; // 2020-05-25 : DATE
+	cout << var1 << " : " << var1.type << endl; // 2020-05-25 : DATE
 
-	cout << var2 << " : " << var2.type; // 4242 : STRING
+	cout << var2 << " : " << var2.type << endl; // 4242 : STRING
                                         // i think you got me ;)
+
+	// New Features
+
+	Object var3 = 5.8;      // this will be Object with Dtype DOUBLE by Default
+	cout << var3 << " : " << var3.type << endl; // 5.8 : DOUBLE
+
+	var3 = var3.to_float(); // and can convert it to suitable Dtype can hold it's value
+
+	cout << var3 << " : " << var3.type << endl; // 5.8 : FLOAT
+	return 0;
+}
+```
+
+### 3.1. ``Object`` Optimization (New Feature)
+this can get the most suitable Data type for the Value of The Object <br>
+to use the memory in efficient way as possible as can
+```cpp
+#include <iostream>
+#include "Object.h"
+using namespace std;
+
+int main() {
+
+	Object var1 = 5.6; // Object with DOUBLE data type
+	Object var2 = 5;   // Object with INT32 data type
+	
+	cout << "Objects Infos Before The Memory Optimization:\n";
+	var1.print_info();
+	var2.print_info();
+
+	// think, can you predict what the most suitable Data Type can hold each value?
+	var1 = var1.optimize_mem(); 
+	var2 = var2.optimize_mem();
+
+	cout << "Objects Infos After The Memory Optimization:\n";
+	var1.print_info(); // this will convert to FLOAT
+	var2.print_info(); // this will convert to INT8
 
 	return 0;
 }
 ```
+
+The class includes methods for converting between different data types, to travel from data type to another using abstracted tools!
 
 ### 4. `String` Manipulation (more about String)
 
