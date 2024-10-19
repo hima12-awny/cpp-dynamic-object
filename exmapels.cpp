@@ -5,7 +5,7 @@
 #include <vector>
 #include <chrono>
 #include <limits>
-#include "ObjectLib/object.h"
+#include "ObjectDs/object.h"
 
 
 
@@ -118,7 +118,7 @@ std::ostream& operator<<(std::ostream& os, const vector<Object>& obj)
 //
 //	// make param enable_numbers = true to handle Number Converting.
 //	vector<Object> numbers = sep_numbers_str.split("/", true);
-//	// numbers vectore be like (in NUMBER Dtypes):
+//	// numbers vector be like (in NUMBER Dtype):
 //	// {2003, 5, 17}
 //
 //
@@ -189,8 +189,8 @@ int main() {
 
 	Object address_str = "15 str_nyc";
 
-	// spletting the address and enabling parsing the numbers.
-	// to get diffrents data type in return.
+	// split the address and enabling parsing the numbers.
+	// to get different data type in return.
 	items = address_str.split(" ", true);
 
 	cout << "\nitems of address_str:\n";
@@ -209,7 +209,7 @@ int main() {
    */
 
    // you can convert the whole vector of doubles to vector of 
-   // Objects easly by calling static methouf from the Object Class.
+   // Objects easily by calling static method from the Object Class.
    // you can see more converting functions in the source file.
 	vector<double> values = { .454, 4, 98, 5 };
 	items = Object::from_vector_double(values);
