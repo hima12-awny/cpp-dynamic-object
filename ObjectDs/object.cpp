@@ -1459,7 +1459,7 @@ bool Object::operator <= (const Object& other) const
 		return type == Dtype::NA;
 	}
 
-	uint8_t compare_res = compareTo(other);
+	int8_t compare_res = compareTo(other);
 	return compare_res == 0 || compare_res == -1;
 }
 bool Object::operator >= (const Object& other) const
@@ -1472,7 +1472,7 @@ bool Object::operator >= (const Object& other) const
 		return type == Dtype::NA;
 	}
 
-	uint8_t compare_res = compareTo(other);
+	int8_t compare_res = compareTo(other);
 
 	return compare_res == 0 || compare_res == 1;
 }
